@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Brandon Grotesque";
-  src: url("/assets/fonts/brandon-grotesque-regular.ttf") format("truetype");
+  src: url("../assets/fonts/brandon-grotesque-regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -69,7 +69,7 @@
 
 @layer utilities {
   .geo-hero {
-    background-image: url("/assets/images/geo-accent.svg");
+    background-image: url("../assets/images/geo-accent.svg");
     background-repeat: no-repeat;
     background-position: right -4rem top -2rem;
     background-size: min(52rem, 90vw);

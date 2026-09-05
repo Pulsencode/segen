@@ -1,11 +1,24 @@
 (function () {
+  function siteBase() {
+    var script = document.querySelector('script[src*="/js/include-partials.js"]');
+    if (!script) {
+      return "";
+    }
+    var scriptPath = new URL(script.src, window.location.href).pathname;
+    return scriptPath.slice(0, scriptPath.lastIndexOf("/js/"));
+  }
+
+  var BASE_PATH = siteBase();
   var PARTIALS = [
-    { id: "site-nav", url: "/partials/nav.html" },
-    { id: "site-footer", url: "/partials/footer.html" },
+    { id: "site-nav", url: BASE_PATH + "/partials/nav.html" },
+    { id: "site-footer", url: BASE_PATH + "/partials/footer.html" },
   ];
 
   function currentPath() {
     var path = window.location.pathname.replace(/index\.html$/i, "");
+    if (BASE_PATH && path.indexOf(BASE_PATH) === 0) {
+      path = path.slice(BASE_PATH.length);
+    }
     if (path === "") {
       return "/";
     }
@@ -46,6 +59,12 @@
       return;
     }
     mount.innerHTML = html;
+    var rootRelativeElements = mount.querySelectorAll('[src^="/"], [href^="/"]');
+    for (var i = 0; i < rootRelativeElements.length; i += 1) {
+      var element = rootRelativeElements[i];
+      var attribute = element.hasAttribute("src") ? "src" : "href";
+      element.setAttribute(attribute, BASE_PATH + element.getAttribute(attribute));
+    }
     setActiveNav(mount);
     if (id === "site-nav") {
       initMobileNav(mount);

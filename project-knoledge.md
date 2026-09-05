@@ -149,13 +149,11 @@ Approved variants under `/assets/images/`: `logo-main-white` (dark backgrounds),
 | Page | Production URL | Source file |
 |---|---|---|
 | Home | `/` | `/index.html` |
-| About | `/about/` | `/about.html` |
+| About | `/about/` | `/about/about.html` |
 | Services | `/services/` | `/services/index.html` |
 | Contact | `/contact/` | `/contact/index.html` |
 | Privacy Policy | `/privacy-policy/` | `/privacy-policy/index.html` |
 | Legal Notice | `/legal/` | `/legal/index.html` |
-
-> **Flag:** the About source file (`/about.html`) doesn't follow the directory + `index.html` pattern used by every other page, and Section 5 requires clean URLs via a directory `index.html`. Confirm whether this should be `/about/index.html` instead, or whether a redirect/rewrite is planned for `/about/`.
 
 No additional public pages without instruction. Employer-focused "For Healthcare Facilities" content lives within Home and Services, not a separate page.
 
@@ -335,8 +333,6 @@ Unique `<title>` and meta description, canonical URL, viewport tag, Open Graph t
 ├── tailwind.config.js
 └── PROJECT_KNOWLEDGE.md
 ```
-
-> Note: this tree still shows `about/index.html`, matching the clean-URL convention in Section 5 — see the flag in Section 6 about `/about.html`.
 
 ---
 

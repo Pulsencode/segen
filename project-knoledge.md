@@ -1,6 +1,5 @@
-# SEGEN Healthcare Website — Production-Ready Project Specification (v2)
+# SEGEN Healthcare Website — Project Specification
 
-**Document status:** Approved development specification, updated with tech/content recommendations
 **Working language:** English
 **Architecture:** Static HTML5 + Tailwind CSS (CLI build) + Vanilla JavaScript
 **Final localization:** Performed only after English content/layout approval
@@ -18,7 +17,9 @@ This file is the single source of truth for any AI assistant or developer workin
 
 SEGEN Healthcare Recruitment connects qualified nurses from India with hospitals, nursing homes, and other healthcare facilities in Germany.
 
-### Core positioning (canonical facts — reference, don't restate in full elsewhere)
+### Core positioning
+
+Treat these as the canonical facts about the company. Reference them where needed; don't restate them in full paragraph form on every page.
 
 - 6+ years of experience in international healthcare recruitment.
 - 500+ nurses successfully placed in Germany.
@@ -56,32 +57,33 @@ Do not recreate, redraw, recolor, or substitute the approved logo files, and don
 | Form handling | Third-party form endpoint (see 3.3) |
 | Hosting | GitHub Pages |
 
-### 3.1 Tailwind: CLI build instead of CDN script
+### 3.1 Tailwind build
 
-**Change from the original spec:** replace the `<script src="https://cdn.tailwindcss.com">` runtime CDN with a **Tailwind CLI** build.
+Tailwind CSS is compiled with the **Tailwind CLI** into a single purged, minified stylesheet — not loaded via the runtime CDN script. This keeps the CSS payload small (better load time and Lighthouse/SEO scores) while remaining fully static: the CLI only runs locally or in CI to produce `css/styles.css`; GitHub Pages serves plain files with no Node runtime in production.
 
-- The CDN script ships the full unpurged utility set at runtime (large JS/CSS payload generated in-browser), which hurts load time and Lighthouse/SEO scores.
-- The CLI (`npx tailwindcss -i input.css -o css/styles.css --minify`) purges unused classes into one small, versioned `css/styles.css` file.
-- No Node runtime is needed in production — the CLI only runs locally/in CI to produce the static CSS file that ships. GitHub Pages still serves plain static files.
-- `tailwind.config.js` keeps the same brand color/font extensions as before.
+```
+npx tailwindcss -i css/input.css -o css/styles.css --minify
+```
 
 ```html
 <link rel="stylesheet" href="/css/styles.css">
 ```
 
-### 3.2 Optional: static site generator for shared nav/footer
+`tailwind.config.js` defines the brand color and font extensions (Section 4).
 
-The current approach copies nav/footer markup into all six page files by hand, which is fine for a small site but drifts easily as edits accumulate. If the site will be edited often, consider **Eleventy (11ty)**: it supports includes/partials but still outputs plain static HTML — no server, no database, deploys to GitHub Pages the same way. Not required; the manual-copy approach in Section 8 remains valid if simplicity is preferred.
+### 3.2 Navigation/footer templating (optional)
+
+Nav and footer markup is copied by hand into every page (Section 8). For a site that will be edited often, **Eleventy (11ty)** is a reasonable option: it supports includes/partials while still outputting plain static HTML — no server, no database, same GitHub Pages deployment. The manual-copy approach is equally valid for a small, infrequently-edited site.
 
 ### 3.3 Contact form backend
 
-Static hosting means the form has no server to submit to. Use a third-party form endpoint such as **Formspree**, **Getform**, or **Web3Forms** (free tiers available) — just a form `action` URL, no backend code. Decide on a provider before building the Contact page markup.
+Static hosting has no server for the form to submit to. Use a third-party form endpoint — **Formspree**, **Getform**, or **Web3Forms** (free tiers available) — via a simple `action` URL, no backend code required. Pick a provider before building the Contact page markup.
 
-### Hard constraints (unchanged)
+### Hard constraints
 
 - No database, backend API, server-side rendering, PHP, or Node/Express backend.
 - Every page must work as a static file served by GitHub Pages.
-- Keep dependencies minimal; no additional frameworks/bundlers beyond what's noted above unless explicitly requested.
+- Keep dependencies minimal; no additional frameworks or bundlers beyond what's specified here unless explicitly requested.
 
 ---
 
@@ -112,7 +114,7 @@ Static hosting means the form has no server to submit to. Use a third-party form
 | Yellow | `#F8BA12` | Highlights and attention elements |
 | Red | `#C91E24` | Alerts, secondary emphasis |
 
-`tailwind.config.js` (used as input to the CLI build):
+`tailwind.config.js`:
 
 ```js
 module.exports = {
@@ -177,7 +179,7 @@ Do not create a second production language unless explicitly requested. See Sect
 
 ## 8. Navigation Bar & Footer
 
-Same nav/footer markup copied into every page (no JS `fetch()`/`innerHTML` injection, no PHP/SSI). Any change is applied to all pages together; only the active-page state differs. *(See Section 3.2 for an optional templating alternative.)*
+Same nav/footer markup copied into every page (no JS `fetch()`/`innerHTML` injection, no PHP/SSI). Any change is applied to all pages together; only the active-page state differs. See Section 3.2 for an optional templating approach.
 
 **Nav:** Home / About / Services / Contact, primary CTA `Contact Us`.
 
@@ -202,25 +204,25 @@ Do not invent contact details, addresses, social URLs, or legal/registration det
 
 ---
 
-## 10. Conversion & Trust Additions (new)
+## 10. Conversion & Trust Elements
 
-Recruitment is a trust-driven category — these additions are recommended alongside the core pages:
+Recruitment is a trust-driven category. These elements are recommended alongside the core pages:
 
-- **Testimonials / success stories:** 2–3 short, anonymized quotes from placed nurses or partner facilities, placed on Home and/or About. Do not fabricate quotes — use real ones once the client supplies them; keep as a clearly marked placeholder until then.
-- **WhatsApp contact button:** for an India-facing audience this typically outperforms the contact form for first-touch inquiries. Add as a persistent floating button or in the Contact page, using the same phone number already approved (`+91 6235 123 456`), pending client confirmation that WhatsApp is monitored on that number.
-- **Process timeline graphic:** a simple visual — Recruitment → Language Training → Recognition → Visa → Placement — on the Services page, replacing or accompanying the current list of 8 services to make the multi-step journey easier to scan.
+- **Testimonials / success stories:** 2–3 short, anonymized quotes from placed nurses or partner facilities, placed on Home and/or About. Quotes must be real and client-supplied — keep as a clearly marked placeholder until they're provided; never fabricate them.
+- **WhatsApp contact button:** for an India-facing audience this typically outperforms the contact form for first-touch inquiries. Add as a persistent floating button or on the Contact page, using the approved phone number (`+91 6235 123 456`), pending client confirmation that WhatsApp is monitored on that number.
+- **Process timeline graphic:** a simple visual — Recruitment → Language Training → Recognition → Visa → Placement — on the Services page, replacing or accompanying the flat list of 8 services (Section 11.2) to make the multi-step journey easier to scan.
 
-None of these introduce new factual claims; they only present the already-approved facts more visually.
+These present the approved facts more visually; they don't introduce new claims.
 
 ---
 
 ## 11. Page Content — English Development Version
 
-Full section-by-section copy (hero text, CTAs, service descriptions) is unchanged from the approved version and lives in the actual page files once built — this spec no longer duplicates every paragraph here to avoid drift between the spec and the live copy. Key reference points:
+Full section-by-section copy (hero text, CTAs, service descriptions) lives in the actual page files. This spec defines structure and reference points rather than duplicating every paragraph, so the spec and the live copy don't drift out of sync.
 
-- **Home:** Hero + stats (Section 1 facts) → Services preview (6 items, see Section 11.2 below) → Language section → "For Healthcare Facilities" employer section → Why SEGEN.
-- **About:** Intro → Indian-German team → Language academy → Experience stats (Section 1 facts) → Mission.
-- **Services:** Intro → 8 services (Recruitment, Placement, Candidate Selection & Coordination, Language Preparation, Professional Recognition, Visa Support, Documentation & Coordination, Personal Support) → "For Healthcare Facilities" section. Consider the process-timeline graphic (Section 10) here instead of, or alongside, the flat 8-item list.
+- **Home:** Hero + stats (Section 9 facts) → Services preview (Section 11.2) → Language section → "For Healthcare Facilities" employer section → Why SEGEN.
+- **About:** Intro → Indian-German team → Language academy → Experience stats (Section 9 facts) → Mission.
+- **Services:** Intro → 8 services (Section 11.2) → "For Healthcare Facilities" section. Consider the process-timeline graphic (Section 10) here instead of, or alongside, the flat list.
 - **Contact:** Intro → Employer CTA (`Send an Enquiry`) → Candidate CTA (`Contact Us`) → form (Name, Email, Phone, "I am a: Nursing Professional / Healthcare Employer", Subject, Message, privacy consent, `Send Message`) → contact details.
 
 SEO titles/descriptions per page (development stage):
@@ -236,13 +238,13 @@ SEO titles/descriptions per page (development stage):
 
 Development-stage English templates only, to be completed with verified client/legal information before production.
 
-**Privacy Policy (`/privacy-policy/`):** data controller details, contact info, data collected via the contact form, purpose/legal basis, cookies/analytics (only if used), third-party services (only if used), retention, data-subject rights, **international data transfers — flag explicitly that candidate data may move between India and Germany, which is a real GDPR trigger requiring its own clause, not boilerplate**, privacy contact, last-updated date.
+**Privacy Policy (`/privacy-policy/`):** data controller details, contact info, data collected via the contact form, purpose/legal basis, cookies/analytics (only if used), third-party services (only if used), retention, data-subject rights, **international data transfers — must explicitly address that candidate data may move between India and Germany, a GDPR trigger requiring its own clause, not boilerplate**, privacy contact, last-updated date.
 
 **Legal Notice (`/legal/`):** legal entity name, authorized representative, registration/tax details (if applicable), regulatory info (if applicable), phone/email (approved values), address (pending verification — do not display), disclaimer requiring legal review.
 
 Footer links to both pages from every page.
 
-### 11.2 Services list (canonical, don't repeat elsewhere)
+### 11.2 Services list
 
 1. Nurse Recruitment
 2. Hospital & Nursing Home Placement
@@ -252,6 +254,8 @@ Footer links to both pages from every page.
 6. Visa Processing Support
 7. Documentation & Coordination
 8. Personal Support
+
+This is the canonical list — reference it rather than restating full descriptions in multiple places.
 
 ---
 
@@ -269,14 +273,14 @@ Unique `<title>` and meta description, canonical URL, viewport tag, Open Graph t
 
 `sitemap.xml` (lists all public pages) and `robots.txt` (allows normal crawling, references the sitemap).
 
-### 11.3 New: structured data and hreflang
+### 11.3 Structured data and hreflang
 
-- **Schema.org JSON-LD** (`Organization` + `LocalBusiness` types) added to Home, using only the already-approved facts (name, description, phone, email — no address until verified). Low effort, helps search engines parse the business correctly ahead of ranking for German queries.
-- **`hreflang` planning:** even though localization happens later, decide the URL pattern now (e.g. `/de/` subdirectory vs. root-domain swap) so the English site's URL structure doesn't need to be reworked when German content ships. Add `hreflang` tags once both languages exist.
+- **Schema.org JSON-LD** (`Organization` + `LocalBusiness` types) on Home, using only the approved facts (name, description, phone, email — no address until verified). Helps search engines parse the business correctly ahead of ranking for German queries.
+- **`hreflang` planning:** decide the URL pattern for the German version now (e.g. `/de/` subdirectory vs. root-domain swap) so the English site's URL structure doesn't need reworking once localization happens. Add `hreflang` tags once both languages exist.
 
 ### Performance
 
-`font-display: swap`; compressed/appropriately sized images; SVG for logos/icons where available; avoid unnecessary JS/dependencies; Tailwind CLI build (Section 3.1) instead of the CDN script for a smaller CSS payload.
+`font-display: swap`; compressed/appropriately sized images; SVG for logos/icons where available; avoid unnecessary JS/dependencies; the Tailwind CLI build (Section 3.1) for a small CSS payload.
 
 ---
 
@@ -325,4 +329,3 @@ Unique `<title>` and meta description, canonical URL, viewport tag, Open Graph t
 14. Keep `sitemap.xml`, `robots.txt`, nav, internal links, and canonical URLs in sync with the site structure.
 15. Meaningful alt text, semantic HTML, responsive layout across mobile/tablet/desktop.
 16. Any testimonials (Section 10) must be real, client-supplied quotes — never fabricated.
-

@@ -326,20 +326,3 @@ Unique `<title>` and meta description, canonical URL, viewport tag, Open Graph t
 15. Meaningful alt text, semantic HTML, responsive layout across mobile/tablet/desktop.
 16. Any testimonials (Section 10) must be real, client-supplied quotes — never fabricated.
 
----
-
-## 15. Open Items / To Confirm
-
-- [x] Phone: `+91 6235 123 456`.
-- [x] Email: `info@segenhealthcare.com`.
-- [ ] Office/address — not verified, do not display.
-- [ ] Social media URLs — pending, keep placeholders.
-- [ ] Exact existing font/logo filenames in the repo.
-- [ ] Favicon and social-sharing image.
-- [ ] Final English copy approval.
-- [ ] Final localization, slugs, and localized SEO copy.
-- [ ] Privacy Policy / Legal Notice final legal review.
-- [ ] Form backend provider choice (Section 3.3).
-- [ ] Real testimonial quotes from client (Section 10).
-- [ ] Confirm WhatsApp is monitored on the approved phone number before adding the WhatsApp CTA.
-- [ ] `hreflang` URL pattern decision ahead of localization (Section 11.3).

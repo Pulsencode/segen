@@ -1,0 +1,26 @@
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-white focus:px-3 focus:py-2 focus:text-segen-navy">Skip to content</a>
+<header class="sticky top-0 z-40 border-b border-white/10 bg-segen-navy text-white">
+  <div class="relative mx-auto flex max-w-content items-center justify-between gap-4 px-4 py-3 sm:px-6">
+    <a href="/" class="shrink-0" data-nav-path="/">
+      <img src="/assets/images/main-logo-white.png" alt="SEGEN Healthcare" class="h-12 w-auto sm:h-14" />
+    </a>
+    <button
+      id="nav-toggle"
+      class="inline-flex items-center justify-center rounded-sm border border-white/20 px-3 py-2 text-sm md:hidden"
+      type="button"
+      aria-controls="nav-panel"
+      aria-expanded="false"
+    >
+      Menu
+    </button>
+    <nav id="nav-panel" class="hidden absolute left-0 right-0 top-full border-b border-white/10 bg-segen-navy px-4 py-4 md:static md:flex md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0" aria-label="Primary">
+      <div class="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+        <a class="nav-link" href="/" data-nav-path="/">Home</a>
+        <a class="nav-link" href="/about/" data-nav-path="/about/">About</a>
+        <a class="nav-link" href="/services/" data-nav-path="/services/">Services</a>
+        <a class="nav-link" href="/contact/" data-nav-path="/contact/">Contact</a>
+      </div>
+      <a class="btn-primary mt-4 md:mt-0" href="/contact/">Contact Us</a>
+    </nav>
+  </div>
+</header>

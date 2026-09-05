@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("/assets/fonts/brandon-grotesque-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    @apply font-brandon text-segen-navy antialiased;
+  }
+
+  body {
+    @apply bg-white font-normal;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 400;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply rounded-sm px-2 py-1 text-sm tracking-wide text-white/80 transition hover:text-white;
+  }
+
+  .nav-link[aria-current="page"] {
+    @apply text-segen-orange;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-sm bg-segen-orange px-5 py-2.5 text-sm tracking-wide text-white transition hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-sm border border-white/30 px-5 py-2.5 text-sm tracking-wide text-white transition hover:border-white hover:bg-white/10;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-sm border border-segen-navy/20 px-5 py-2.5 text-sm tracking-wide text-segen-navy transition hover:border-segen-navy hover:bg-segen-navy hover:text-white;
+  }
+
+  .section-kicker {
+    @apply text-xs tracking-[0.28em] text-segen-orange uppercase;
+  }
+}
+
+@layer utilities {
+  .geo-hero {
+    background-image: url("/assets/images/geo-accent.svg");
+    background-repeat: no-repeat;
+    background-position: right -4rem top -2rem;
+    background-size: min(52rem, 90vw);
+  }
+}

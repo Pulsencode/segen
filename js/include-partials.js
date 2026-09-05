@@ -1,6 +1,6 @@
 (function () {
   function siteBase() {
-    var script = document.querySelector('script[src*="/js/include-partials.js"]');
+    var script = document.currentScript;
     if (!script) {
       return "";
     }

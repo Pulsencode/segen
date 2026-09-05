@@ -25,6 +25,12 @@
   h4 {
     font-weight: 400;
   }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
 }
 
 @layer components {
@@ -50,6 +56,14 @@
 
   .section-kicker {
     @apply text-xs tracking-[0.28em] text-segen-orange uppercase;
+  }
+
+  @media (max-width: 639px) {
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+      @apply w-full;
+    }
   }
 }
 

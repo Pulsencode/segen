@@ -35,17 +35,29 @@
   <body class="min-h-screen">
     <div id="site-nav"></div>
     <main id="main-content">
-      <section class="relative overflow-hidden bg-segen-navy text-white geo-hero">
-        <div class="relative mx-auto max-w-content px-4 py-20 sm:px-6 lg:py-28">
+      <section class="relative isolate overflow-hidden bg-segen-navy text-white geo-hero">
+        <video
+          class="absolute inset-0 h-full w-full object-cover opacity-35"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="/assets/videos/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-segen-navy/65" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-content px-4 py-16 sm:px-6 sm:py-20 lg:py-32">
           <p class="section-kicker">HEALTHCARE RECRUITMENT</p>
-          <h1 class="mt-5 text-5xl tracking-[0.18em] sm:text-7xl">SEGEN</h1>
-          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">
+          <h1 class="mt-5 text-4xl tracking-[0.14em] sm:text-7xl sm:tracking-[0.18em]">SEGEN</h1>
+          <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
             Professional Nurses. Strong German Language Skills. Reliable Connections between India and Germany.
           </p>
-          <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/65">
+          <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
             We recruit qualified, motivated nurses from India for hospitals, nursing homes, and other healthcare providers in Germany — covering recruitment, language preparation, recognition, visa support, documentation, and entry.
           </p>
-          <div class="mt-10 flex flex-wrap gap-3">
+          <div class="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
             <a class="btn-primary" href="/contact/">Contact Us</a>
             <a class="btn-secondary" href="/services/">Explore services</a>
           </div>
